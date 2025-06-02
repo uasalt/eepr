@@ -5,6 +5,9 @@ local menu, pos = {
     "Reboot"
 }, 0
 
+local gpu = component.proxy(component.list("gpu")())
+local sWidth, sHeight = gpu.getResolution()
+
 function center(text)
     return math.ceil(sWidth / 2 - (#text /2 )), math.ceil(sHeight / 2) - 1
 end
@@ -24,8 +27,7 @@ function drawMenu()
 end
 
 while true do
-    local gpu = component.proxy(component.list("gpu")())
-    local sWidth, sHeight = gpu.getResolution()
+    sWidth, sHeight = gpu.getResolution()
     gpu.fill(0, 0, sWidth, sHeight, " ")
     local event, UUID, a, b, c = computer.pullSignal(1)
     gpu.set(1, 1, "event: " .. tostring(event))
