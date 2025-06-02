@@ -18,7 +18,7 @@ function drawMenu()
         if (pos == i) then
             gpu.setBackground(0x202020)
             local w, h = center(menu[i])
-            gpu.set(w, h - (#menu - pos))
+            gpu.set(w, h - (#menu - pos), menu[pos])
             gpu.setBackground(0x141414)
         else
             gpu.set(center(menu[i]))
