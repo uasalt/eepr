@@ -25,7 +25,7 @@ function drawMenu()
         else
             gpu.setBackground(0x141414)
         end
-        gpu.set(w, h, item)
+        gpu.set(w, h + 2, item)
     end
 end
 
