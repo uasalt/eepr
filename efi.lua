@@ -44,5 +44,5 @@ while true do
             drawMenu()
         end
     end
-    drawMenu()
+    --drawMenu()
 end
