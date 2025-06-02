@@ -7,6 +7,7 @@ local menu, pos = {
 
 local gpu = component.proxy(component.list("gpu")())
 local sWidth, sHeight = gpu.getResolution()
+local eeprom = component.proxy(compontent.list('eeprom')())
 
 function center(text)
     return math.ceil(sWidth / 2 - #text / 2), math.ceil(sHeight / 2) - 1
@@ -67,8 +68,19 @@ while true do
                 pos = 0
                 drawMenu()
             elseif ( menu[pos] == 'MineOS EFI' ) then
+                eeprom.set([[local connection, data, chunk = component.proxy(component.list("internet")()).request("https://raw.githubusercontent.com/IgorTimofeev/MineOS/master/Installer/Main.lua"), ""
+while true do
+chunk = connection.read(math.huge)
+if chunk then
+data = data .. chunk
+else
+break
+end
+end
+connection.close()
+load(data)()]])
             end
         end
     end
-    --drawMenu()
+    drawMenu()
 end
