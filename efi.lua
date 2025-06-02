@@ -15,6 +15,7 @@ end
 function drawMenu()
     gpu.setBackground(0x141414)
     for i, _ in ipairs(menu) do
+        i = i - 1
         if (pos == i) then
             gpu.setBackground(0x202020)
         end
