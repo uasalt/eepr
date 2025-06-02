@@ -27,6 +27,19 @@ function drawMenu()
     end
 end
 
+function request(url)
+    local inet = component.list("internet") and component.proxy(component.list("internet")())
+    if not inet then error("no internet") end
+    local handle = inet.request(url)
+    local data = ""
+    repeat
+        local chunk = handle.read()
+        if chunk then data = data .. chunk end
+    until not chunk
+    handle.close()
+    return data
+end
+
 while true do
     sWidth, sHeight = gpu.getResolution()
     local event, UUID, a, b, c = computer.pullSignal(1)
@@ -36,12 +49,25 @@ while true do
     gpu.set(1, 4, "b: " .. tostring(b))
     gpu.set(1, 5, "c: " .. tostring(c))
     if ( event == 'key_down' ) then
-        if (b == 200 and pos >= 0) then -- Стрелка вверх
+        if ( b == 200 and pos >= 0) then -- Стрелка вверх
             pos = pos - 1
             drawMenu()
-        elseif (b == 208 and #menu ~= pos ) then -- Стрелка вниз
+        elseif ( b == 208 and #menu ~= pos ) then -- Стрелка вниз
             pos = pos + 1
             drawMenu()
+        elseif ( b == 28 ) then -- Enter
+            if ( menu[pos] == 'Reboot' ) then
+                computer.shutdown(true)
+            elseif ( menu[pos] == 'Recovery other EEPROM' ) then
+                menu = {
+                    "uEFI",
+                    "MineOS EFI",
+                    "BIOS"
+                }
+                pos = 0
+                drawMenu()
+            elseif ( menu[pos] == 'MineOS EFI' ) then
+            end
         end
     end
     --drawMenu()
