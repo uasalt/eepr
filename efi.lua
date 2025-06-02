@@ -9,25 +9,26 @@ local gpu = component.proxy(component.list("gpu")())
 local sWidth, sHeight = gpu.getResolution()
 
 function center(text)
-    return math.ceil(sWidth / 2 - (#text /2 )), math.ceil(sHeight / 2) - 1
+    return math.ceil(sWidth / 2 - #text / 2), math.ceil(sHeight / 2) - 1
 end
 
 function drawMenu()
     gpu.setBackground(0x141414)
-    for i, _ in ipairs(menu) do
-        i = i - 1
-        if (pos == i) then
+    gpu.fill(1, 1, sWidth, sHeight, " ")
+    for i, item in ipairs(menu) do
+        local w, h = center(item)
+        h = h - (#menu // 2) + (i - 1)
+        if pos == i then
             gpu.setBackground(0x202020)
+        else
+            gpu.setBackground(0x141414)
         end
-        local w, h = center(menu[i])
-        gpu.set(w, h - (#menu - i), menu[pos])
-        gpu.setBackground(0x141414)
+        gpu.set(w, h, item)
     end
 end
 
 while true do
     sWidth, sHeight = gpu.getResolution()
-    gpu.fill(0, 0, sWidth, sHeight, " ")
     local event, UUID, a, b, c = computer.pullSignal(1)
     gpu.set(1, 1, "event: " .. tostring(event))
     gpu.set(1, 2, "UUID: " .. tostring(UUID))
