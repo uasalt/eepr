@@ -17,13 +17,10 @@ function drawMenu()
     for i, _ in ipairs(menu) do
         if (pos == i) then
             gpu.setBackground(0x202020)
-            local w, h = center(menu[i])
-            gpu.set(w, h - (#menu - i), menu[pos])
-            gpu.setBackground(0x141414)
-        else
-            local w, h = center(menu[i])
-            gpu.set(w, h - (#menu - i), menu[pos])
         end
+        local w, h = center(menu[i])
+        gpu.set(w, h - (#menu - i), menu[pos])
+        gpu.setBackground(0x141414)
     end
 end
 
