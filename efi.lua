@@ -36,7 +36,7 @@ while true do
     gpu.set(1, 4, "b: " .. tostring(b))
     gpu.set(1, 5, "c: " .. tostring(c))
     if ( event == 'key_down' ) then
-        if (b == 200 and pos > 0) then -- Стрелка вверх
+        if (b == 200 and pos >= 0) then -- Стрелка вверх
             pos = pos - 1
             drawMenu()
         elseif (b == 208 and #menu ~= pos ) then -- Стрелка вниз
