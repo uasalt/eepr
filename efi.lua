@@ -7,7 +7,7 @@ local menu, pos = {
 
 local gpu = component.proxy(component.list("gpu")())
 local sWidth, sHeight = gpu.getResolution()
-local eeprom = component.proxy(compontent.list('eeprom')())
+local eeprom = component.proxy(component.list('eeprom')())
 
 function center(text)
     return math.ceil(sWidth / 2 - #text / 2), math.ceil(sHeight / 2) - 1
