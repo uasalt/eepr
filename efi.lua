@@ -68,8 +68,11 @@ while true do
                     table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]" or ""))
                 end
                 for address in component.list('disk_drive') do
-                    local fs = component.proxy(address)
-                    table.insert(menu, (fs.getLabel() or address) .. " [FDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]"))
+                    local floppy = component.proxy(address)
+                    if not floppy.isEmpty() then
+                        local fs = component.proxy(floppy['media'])
+                        table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]" or ""))
+                    end
                 end
                 prevPos = menu[pos]
                 pos = 1
