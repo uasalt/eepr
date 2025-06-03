@@ -90,7 +90,7 @@ while true do
                         ['id'] = 0
                     },
                     {
-                        ['title'] = 'Energy: ' .. tostring(computer.energy() - computer.maxEnergy()) .. '/' .. tostring(computer.maxEnergy()) .. '(' .. math.floor((computer.energy() - computer.maxEnergy() / computer.maxEnergy()) * 100 + 0.5) .. '%)',
+                        ['title'] = 'Energy: ' .. tostring(computer.maxEnergy() - computer.energy()) .. '/' .. tostring(computer.maxEnergy()) .. '(' .. math.floor((computer.maxEnergy() - computer.energy() / computer.maxEnergy()) * 100 + 0.5) .. '%)',
                         ['id'] = 0
                     }
                 }
