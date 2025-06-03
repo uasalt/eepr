@@ -90,10 +90,17 @@ while true do
                         ['id'] = 0
                     },
                     {
-                        ['title'] = 'Energy: ' .. tostring(computer.maxEnergy() - computer.energy()) .. '/' .. tostring(computer.maxEnergy()) .. '(' .. math.floor((computer.maxEnergy() - computer.energy() / computer.maxEnergy()) * 100 + 0.5) .. '%)',
+                        ['title'] = 'Energy: ' .. tostring(computer.maxEnergy() - computer.energy()) .. '/' .. tostring(computer.maxEnergy()) .. ' (' .. math.floor((computer.maxEnergy() - computer.energy() / computer.maxEnergy()) * 100 + 0.5) .. '%)',
+                        ['id'] = 0
+                    },
+                    {
+                        ['title'] = 'back',
                         ['id'] = 0
                     }
                 }
+                prevPos = menu[pos]
+                pos = 1
+                drawMenu()
             elseif ( menu[pos]['title'] == 'Disks utility' ) then
                 menu = { {
                         ['title'] = 'back',
