@@ -65,7 +65,7 @@ while true do
                 menu = { 'back' }
                 for address in component.list('filesystem') do
                     local fs = component.proxy(address)
-                    table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]"))
+                    table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]" or ""))
                 end
                 for address in component.list('disk_drive') do
                     local fs = component.proxy(address)
