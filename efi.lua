@@ -9,6 +9,7 @@ local general = menu
 local gpu = component.proxy(component.list("gpu")())
 local sWidth, sHeight = gpu.getResolution()
 local eeprom = component.proxy(component.list('eeprom')())
+gpu.setForeground = 0xFFFFFF
 
 function center(text)
     return math.ceil(sWidth / 2 - #text / 2), math.ceil(sHeight / 2) - 1
