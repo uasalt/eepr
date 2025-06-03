@@ -70,7 +70,7 @@ while true do
                 for address in component.list('disk_drive') do
                     local floppy = component.proxy(address)
                     if not floppy.isEmpty() then
-                        local fs = component.proxy(floppy['media'])
+                        local fs = component.proxy(floppy['media'][0])
                         table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]" or ""))
                     end
                 end
