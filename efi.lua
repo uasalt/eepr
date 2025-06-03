@@ -78,7 +78,8 @@ while true do
             elseif ( menu[pos] == 'MineOS EFI' ) then
                 menu = {
                     "EFI",
-                    "Installer"
+                    "Installer",
+                    "back"
                 }
                 prevPos = menu[pos]
                 pos = 1
