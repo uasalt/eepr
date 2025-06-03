@@ -1,4 +1,4 @@
-local code= [[local p,d,f,s=component.proxy,component.list("filesystem"),component.list("disk_drive"),component.list("screen")()
+local p,d,f,s=component.proxy,component.list("filesystem"),component.list("disk_drive"),component.list("screen")()
 local g,e=p(component.list("gpu")()),p(component.list("eeprom")())
 local z,r=math.huge,math.floor
 g.bind(s)
@@ -53,10 +53,4 @@ if init then init() return end
 end
 for a in d do local init=l(a) if init then computer.setBootAddress(a) init() return end end
 for a in f do local init=l(a) if init then computer.setBootAddress(a) init() return end end
-interface()]]
-
-local component = require("component")
-local eeprom = component.eeprom
-eeprom.setLabel("uEFI")
-eeprom.set(code)
-print("Перезагрузите свое устройство")
+interface()
