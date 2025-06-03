@@ -105,7 +105,7 @@ while true do
                 prevPos = menu[pos]
                 pos = 1
                 drawMenu()
-            elseif ( menu[pos]['id'] ~= 0 and #menu[pos]['id'] == 36 and not contains({"Set as bootable", "Change label", "Erase", "back"}, menu[pos]['title']) ) then
+            elseif ( menu[pos]['id'] ~= 0 and #menu[pos]['id'] == 36 and not contains({"Set as bootable", "Change label", "Erase"}, menu[pos]['title']) ) then
                 menu = {
                     {
                         ['title'] = "Set as bootable",
@@ -127,7 +127,7 @@ while true do
                 prevPos = menu[pos]
                 pos = 1
                 drawMenu()
-            elseif contains({"Set as bootable", "Change label", "Erase", "back"}, menu[pos]['title']) then
+            elseif contains({"Set as bootable", "Change label", "Erase"}, menu[pos]['title']) then
                 if menu[pos]['title'] == 'Set as bootable' then
                     eeprom.setData(menu[pos]['id'])
                 elseif menu[pos]['title'] == 'Erase' then
