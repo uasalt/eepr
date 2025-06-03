@@ -61,6 +61,19 @@ while true do
         elseif ( b == 28 ) then -- Enter
             if ( menu[pos] == 'Reboot' ) then
                 computer.shutdown(true)
+            elseif ( menu[pos] == 'Disks utility' ) then
+                menu = { 'back' }
+                for address in component.list('filesystem') do
+                    local fs = component.proxy(address)
+                    table.insert(menu, (fs.getLabel() or address) .. " [HDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]"))
+                end
+                for address in component.list('disk_drive') do
+                    local fs = component.proxy(address)
+                    table.insert(menu, (fs.getLabel() or address) .. " [FDD]" .. (fs.isReadOnly() and "[RO]" or "[RW]") .. (eeprom.getData() == address and "[BOOT]"))
+                end
+                prevPos = menu[pos]
+                pos = 1
+                drawMenu()
             elseif ( menu[pos] == 'Recovery other' ) then
                 menu = {
                     "uEFI",
