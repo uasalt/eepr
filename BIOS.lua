@@ -9,13 +9,15 @@ do
       return table.unpack(result, 2, result.n)
     end
   end
+
   local eeprom = component.list("eeprom")()
   computer.getBootAddress = function()
-    return boot_invoke(eeprom, "getData", address)
+    return boot_invoke(eeprom, "getData")
   end
-  computer.setBootAddress = function()
+  computer.setBootAddress = function(address)
     return boot_invoke(eeprom, "setData", address)
   end
+
   do
     local screen = component.list("screen")()
     local gpu = component.list("gpu")()
@@ -23,6 +25,7 @@ do
       boot_invoke(gpu, "bind", screen)
     end
   end
+
   local function tryLoadFrom(address)
     local handle, reason = boot_invoke(address, "open", "/init.lua")
     if not handle then
@@ -30,7 +33,7 @@ do
     end
     local buffer = ""
     repeat
-      local data, reason = boot_invoke(address, "read", handle, ndle, math.maxinteger or math.huge)
+      local data, reason = boot_invoke(address, "read", handle, math.huge)
       if not data and reason then
         return nil, reason
       end
@@ -39,19 +42,27 @@ do
     boot_invoke(address, "close", handle)
     return load(buffer, "=init")
   end
+
   local reason
-  if computer.getBootAddress() then
-    init, reason = tryLoadFrom(computer.getBootAddress())
+  local address = computer.getBootAddress()
+  if address then
+    init, reason = tryLoadFrom(address)
   end
+
   if not init then
-    computer.setBootAddress(address)
-    break
+    for addr in component.list("filesystem") do
+      init, reason = tryLoadFrom(addr)
+      if init then
+        computer.setBootAddress(addr)
+        break
+      end
+    end
   end
 end
-end
+
 if not init then
   error("no bootable medium found" .. (reason and (": " .. tostring(reason)) or ""), 0)
 end
+
 computer.beep(1000, 0.2)
-end
 return init()
