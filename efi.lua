@@ -80,6 +80,20 @@ while true do
         elseif ( b == 28 ) then -- Enter
             if ( menu[pos]['title'] == 'Reboot' ) then
                 computer.shutdown(true)
+            elseif ( menu[pos]['title'] == 'Computer info' ) then
+                local total = computer.totalMemory()
+                local used = total - computer.freeMemory()
+                local percent = math.floor((used / total) * 100 + 0.5)
+                menu = {
+                    {
+                        ['title'] = 'RAM: ' .. tostring(used) .. '/' .. tostring(total) .. '(' .. percent .. '%)',
+                        ['id'] = 0
+                    },
+                    {
+                        ['title'] = 'Energy: ' .. tostring(computer.energy() - computer.maxEnergy()) .. '/' .. tostring(computer.maxEnergy()) .. '(' .. math.floor((computer.energy() - computer.maxEnergy() / computer.maxEnergy()) * 100 + 0.5) .. '%)',
+                        ['id'] = 0
+                    }
+                }
             elseif ( menu[pos]['title'] == 'Disks utility' ) then
                 menu = { {
                         ['title'] = 'back',
