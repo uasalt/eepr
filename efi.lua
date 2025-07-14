@@ -65,11 +65,11 @@ end
 while true do
     sWidth, sHeight = gpu.getResolution()
     local event, UUID, a, b, c = computer.pullSignal(1)
-    gpu.set(1, 1, "event: " .. tostring(event))
-    gpu.set(1, 2, "UUID: " .. tostring(UUID))
-    gpu.set(1, 3, "a: " .. tostring(a))
-    gpu.set(1, 4, "b: " .. tostring(b))
-    gpu.set(1, 5, "c: " .. tostring(c))
+    -- gpu.set(1, 1, "event: " .. tostring(event))
+    -- gpu.set(1, 2, "UUID: " .. tostring(UUID))
+    -- gpu.set(1, 3, "a: " .. tostring(a))
+    -- gpu.set(1, 4, "b: " .. tostring(b))
+    -- gpu.set(1, 5, "c: " .. tostring(c))
     if ( event == 'key_down' ) then
         if ( b == 200 and pos > 1) then -- Стрелка вверх
             pos = pos - 1
