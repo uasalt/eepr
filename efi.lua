@@ -209,7 +209,7 @@ while true do
                 eeprom.setLabel("MineOS EFI")
                 eeprom.set([[local connection, data, chunk = component.proxy(component.list("internet")()).request("https://raw.githubusercontent.com/IgorTimofeev/MineOS/master/Installer/Main.lua"), "";while true do chunk = connection.read(math.huge);if chunk then data = data .. chunk else break end;end;connection.close();load(data)()]])
             elseif ( menu[pos]['title'] == 'BIOS' ) then
-                local code = request("https://raw.githubusercontent.com/uasalt/eepr/refs/heads/main/BIOS.lua")
+                local code = request("https://raw.githubusercontent.com/MightyPirates/OpenComputers/refs/heads/master-MC1.7.10/src/main/resources/assets/opencomputers/lua/bios.lua")
                 eeprom.setLabel("EEPROM (Lua BIOS)")
                 eeprom.set(code)
             elseif ( menu[pos]['title'] == 'back' ) then
